@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: demo
+spoonacular:
+  base-url: https://api.spoonacular.com
+  api-key: ${SPOONACULAR_API_KEY}
