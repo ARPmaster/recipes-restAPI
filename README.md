@@ -121,7 +121,7 @@ Respuesta `400 Bad Request`:
 ```
 
 ## Extras
-- [ ] Implementar un mecanismo de caché para evitar llamadas repetidas a la API de Spoonacular
+- [x] Implementar un mecanismo de caché para evitar llamadas repetidas a la API de Spoonacular
 - [ ] Preparar el proyecto para ejecutarse en un contenedor Docker
 - [ ] Incluir documentación Swagger para los endpoints
 - [x] Añadir pruebas unitarias y/o de integración para los endpoints
