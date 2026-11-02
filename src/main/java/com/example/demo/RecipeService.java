@@ -16,9 +16,10 @@ public class RecipeService {
 	public RecipeService(SpoonacularClient client) {
 		this.client = client;
 	}
-	@Cacheable("query")
+
+	@Cacheable(cacheNames = "recipes",key = "{#query.trim().toLowerCase(),#number,#offset}")
 	public RecipeSearchResponse search(String query, int number, int offset) {
-		SpoonacularSearchResponse response = client.searchRecipes(query.trim().toLowerCase(), number, offset);
+		SpoonacularSearchResponse response = client.searchRecipes(query, number, offset);
 		List<RecipeSummary> results = response.results() == null
 				? List.of()
 				: response.results().stream()
