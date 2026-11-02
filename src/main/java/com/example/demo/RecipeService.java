@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.RecipeSearchResponse;
@@ -15,9 +16,9 @@ public class RecipeService {
 	public RecipeService(SpoonacularClient client) {
 		this.client = client;
 	}
-
+	@Cacheable("query")
 	public RecipeSearchResponse search(String query, int number, int offset) {
-		SpoonacularSearchResponse response = client.searchRecipes(query, number, offset);
+		SpoonacularSearchResponse response = client.searchRecipes(query.trim().toLowerCase(), number, offset);
 		List<RecipeSummary> results = response.results() == null
 				? List.of()
 				: response.results().stream()
