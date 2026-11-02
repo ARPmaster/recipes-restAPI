@@ -1,11 +1,11 @@
 spring:
   application:
     name: demo
-cache:
-  type: caffeine
-  cache-names: recipes
-  caffeine:
-    spec: maximunSize=1000,expireAfterWrite=10m
+  cache:
+    type: caffeine
+    cache-names: recipes
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=10m
 spoonacular:
   base-url: https://api.spoonacular.com
   api-key: ${SPOONACULAR_API_KEY}
