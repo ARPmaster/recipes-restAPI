@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.net.URI;
 import java.util.List;
 
+import com.example.demo.exception.SpoonacularException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -22,7 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.demo.SpoonacularException.Reason;
+import com.example.demo.exception.SpoonacularException.Reason;
 import com.example.demo.dto.RecipeSearchResponse;
 import com.example.demo.dto.RecipeSummary;
 

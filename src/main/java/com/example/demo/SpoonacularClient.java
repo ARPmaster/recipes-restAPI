@@ -3,6 +3,7 @@ package com.example.demo;
 import java.net.URI;
 import java.util.Map;
 
+import com.example.demo.exception.SpoonacularException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriBuilder;
 
-import com.example.demo.SpoonacularException.Reason;
+import com.example.demo.exception.SpoonacularException.Reason;
 
 /** Único punto de la aplicación que conoce la API de Spoonacular. */
 @Component
