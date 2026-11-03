@@ -36,7 +36,7 @@ public class RecipeService {
 	public RecipeSearchResponse search(String query) {
 		SpoonacularSearchResponse response = client.searchRecipes(query);
 		if(response.results()==null||response.results().isEmpty()){
-			throw new RecipeNotFoundException("No se ha encontrado ninguna receta para la búsqueda indicada,");
+			throw new RecipeNotFoundException("No se ha encontrado ninguna receta para la búsqueda indicada.");
 		}
 		SpoonacularSearchResponse.Result recipe=response.results().getFirst();
 		List<String> ingredientes=orEmpty(recipe.extendedIngredients()).stream().map(SpoonacularSearchResponse.Ingredient::original).toList();

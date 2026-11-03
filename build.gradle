@@ -29,6 +29,8 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	// cafeine
 	implementation 'com.github.ben-manes.caffeine:caffeine'
+	//swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'
 }
 
 tasks.named('test') {
