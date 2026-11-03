@@ -19,11 +19,22 @@ public class SpoonacularClient {
 
 	private final RestClient restClient;
 
+	/**
+	 * Constructor que usa Spring al arrancar la aplicación.
+	 *
+	 * @param properties URL base y clave de la API de Spoonacular
+	 */
 	@Autowired
 	public SpoonacularClient(SpoonacularProperties properties) {
 		this(properties, RestClient.builder());
 	}
 
+	/**
+	 * Prepara el cliente HTTP. Recibir el builder permite a los tests usar un servidor simulado.
+	 *
+	 * @param properties URL base y clave de la API de Spoonacular
+	 * @param builder constructor del cliente HTTP
+	 */
 	SpoonacularClient(SpoonacularProperties properties, RestClient.Builder builder) {
 		this.restClient = builder
 				.baseUrl(properties.baseUrl())
@@ -31,11 +42,18 @@ public class SpoonacularClient {
 				.build();
 	}
 
-	SpoonacularSearchResponse searchRecipes(String query, int number, int offset) {
+	/**
+	 * Llama a Spoonacular para buscar recetas.
+	 *
+	 * @param query texto a buscar
+	 * @return la respuesta de Spoonacular; su lista de resultados puede estar vacía
+	 * @throws SpoonacularException si Spoonacular responde con error, no se puede conectar o la respuesta no es válida
+	 */
+	SpoonacularSearchResponse searchRecipes(String query) {
 		SpoonacularSearchResponse response;
 		try {
 			response = restClient.get()
-					.uri(uri -> buildSearchUri(uri, query, number, offset))
+					.uri(uri -> buildSearchUri(uri, query))
 					.retrieve()
 					.onStatus(HttpStatusCode::isError, (request, upstream) -> {
 						throw toException(upstream.getStatusCode());
@@ -52,14 +70,29 @@ public class SpoonacularClient {
 		return response;
 	}
 
-	private URI buildSearchUri(UriBuilder uri, String query, int number, int offset) {
+	/**
+	 * Construye la URL de la búsqueda: pide un solo resultado con su información, ingredientes e instrucciones.
+	 *
+	 * @param uri constructor de URLs que ya incluye la dirección base
+	 * @param query texto a buscar; se codifica para que los caracteres especiales no rompan la URL
+	 * @return la URL completa de la búsqueda
+	 */
+	private URI buildSearchUri(UriBuilder uri, String query) {
 		return uri.path("/recipes/complexSearch")
 				.queryParam("query", "{query}")
-				.queryParam("number", "{number}")
-				.queryParam("offset", "{offset}")
-				.build(Map.of("query", query, "number", number, "offset", offset));
+				.queryParam("number", 1)
+				.queryParam("addRecipeInformation",true)
+				.queryParam("fillIngredients",true)
+				.queryParam("addRecipeInstructions",true)
+				.build(Map.of("query", query ));
 	}
 
+	/**
+	 * Convierte un código de error HTTP de Spoonacular en nuestra excepción.
+	 *
+	 * @param status código HTTP recibido: 401 es clave inválida, 402 y 429 cuota agotada, y el resto error del proveedor
+	 * @return la excepción con el motivo correspondiente
+	 */
 	private static SpoonacularException toException(HttpStatusCode status) {
 		String message = "Spoonacular respondió " + status.value();
 		return switch (status.value()) {
