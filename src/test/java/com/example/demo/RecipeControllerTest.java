@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.net.URI;
 import java.util.List;
 
+import com.example.demo.controller.RecipeController;
 import com.example.demo.exception.RecipeNotFoundException;
 import com.example.demo.exception.SpoonacularException;
 import org.junit.jupiter.api.Test;

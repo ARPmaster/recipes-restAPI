@@ -3,6 +3,7 @@ package com.example.demo;
 import java.net.URI;
 import java.util.Map;
 
+import com.example.demo.config.SpoonacularProperties;
 import com.example.demo.exception.SpoonacularException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;

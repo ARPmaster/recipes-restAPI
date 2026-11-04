@@ -1,0 +1,18 @@
+# La API key se pasa al arrancar el contenedor: nunca debe entrar en la imagen.
+.env
+
+.git
+.gitattributes
+.gitignore
+.gradle
+.idea
+.vscode
+build
+out
+bin
+*.iml
+*.md
+gradlew.bat
+Dockerfile
+.dockerignore
+compose.yaml
