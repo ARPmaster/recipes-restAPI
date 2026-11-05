@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.http.ProblemDetail;
+import com.example.demo.dto.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,10 +41,10 @@ public class RecipeController {
 	@Operation(summary = "Buscar una receta por nombre",description = "Devuelve el primer resultado de la búsqueda.")
 	@ApiResponse(responseCode = "200", description = "Receta encontrada",
 			content = @Content(mediaType = "application/json", schema = @Schema(implementation = RecipeSearchResponse.class)))
-	@ApiResponse(responseCode = "400",description = "Falta query o está vacío", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ProblemDetail.class)))
-	@ApiResponse(responseCode = "404",description = "No hay ninguna receta para esta búsqueda", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ProblemDetail.class)))
-	@ApiResponse(responseCode = "502",description = "Spoonacular rechaza la API key o no está disponible", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ProblemDetail.class)))
-	@ApiResponse(responseCode = "503",description = "Cuota de Spoonacular agotada", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ProblemDetail.class)))
+	@ApiResponse(responseCode = "400",description = "Falta query o está vacío", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ErrorResponse.class)))
+	@ApiResponse(responseCode = "404",description = "No hay ninguna receta para esta búsqueda", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ErrorResponse.class)))
+	@ApiResponse(responseCode = "502",description = "Spoonacular rechaza la API key o no está disponible", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ErrorResponse.class)))
+	@ApiResponse(responseCode = "503",description = "Cuota de Spoonacular agotada", content = @Content(mediaType = "application/problem+json", schema = @Schema(implementation = ErrorResponse.class)))
 
 	@GetMapping
 	public RecipeSearchResponse search(

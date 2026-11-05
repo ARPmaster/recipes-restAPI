@@ -1,8 +1,6 @@
 # recipes-restAPI
 > API REST que busca una receta por nombre mediante Spoonacular.
 
-[![Java 21](https://img.shields.io/badge/Java-21-blue)](https://openjdk.org/projects/jdk/21/)
-
 ## ¿Qué hace esta API?
 Expone un endpoint propio para buscar recetas por nombre y usa Spoonacular como proveedor. Devuelve el primer resultado de la búsqueda.
 
@@ -34,7 +32,7 @@ La API necesita una key de Spoonacular para buscar recetas.
    SPOONACULAR_API_KEY=tu_api_key
    ```
 
-> **Importante:** sin una key válida, la API arranca, pero las búsquedas devuelven un error `502 Bad Gateway`.
+> **Importante:** con una key incorrecta, la API arranca, pero las búsquedas devuelven un error `502 Bad Gateway`.
 
 ### 3. Ejecutar los tests
 #### Linux
@@ -171,9 +169,4 @@ src/main/java/com/example/demo/
 └── SpoonacularSearchResponse.java  Respuesta recibida de Spoonacular
 ```
 
-## Extras
-- [x] Implementar un mecanismo de caché para evitar llamadas repetidas a la API de Spoonacular
-- [x] Preparar el proyecto para ejecutarse en un contenedor Docker
-- [x] Incluir documentación Swagger para los endpoints
-- [x] Añadir pruebas unitarias y/o de integración para los endpoints
-- [x] Subir el proyecto a un repositorio público (por ejemplo, GitHub)
+
